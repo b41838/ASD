@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<!-- Kyler Schroeder
+	 Visual Frameworks 1304
+	 Full Sail University -->
+	 
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="author" content="Kyler Schroeder" />
+		
+		<title>iPill Keeper</title>
+		
+		<!-- Viewport options -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320" />
+		
+		<!-- Smooth fonts in IE Mobile -->
+		<meta http-equiv="cleartype" content="on">
+		
+		<!-- Search options -->
+		<meta name="keywords" content="Pills, Reminder, Diabetes" />
+		<meta name="description" content="A simple pill reminder application for diabetes patients." />
+		<meta name="robots" content="index" />
+
+		<!-- Stylesheets -->
+		<link href="css/style.css" rel="stylesheet" type="text/css">
+				
+		<!-- Icons -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+	</head>
+
+	<body> <!-- Starting content section of code -->
+		<div> <!-- Container div -->
+			<header> <!-- App logo -->
+				<a href="index.html"><img src="img/logo.png"></a>
+			</header>
+			
+			<section> <!-- Collects user input -->
+				<form action="#" method="post" id="addPillForm">
+					<fieldset>
+						<legend>Pill Info</legend> <!-- Displays form title -->
+						<span id="requiredFileds">Required Fields</span>
+						<ul id="errors"></ul>
+
+						<ul>
+							<li><label for="date">Date: </label><br />
+								<input type="datetime-local" id="date" /></li>
+							<li><label for="sugarLevel">Blood Sugar Level: </label><br /> <!-- Start dropdown menu -->
+								<select id="sugarLevel">
+									<optgroup label="Green">
+										<option value="littleLow">A Little Low</option>
+										<option value="littleHigh">A Little High</option>
+									</optgroup>
+									<optgroup label="Yellow">
+										<option value="low">Low</option>
+										<option value="high">High</option>
+									</optgroup>
+									<optgroup label="Red">
+										<option value="extremelyLow">Extremely Low</option>
+										<option value="extremelyHigh">Extremely High</option>
+									</optgroup>
+								</select></li> <!-- End dropdown menu -->
+							<li><label for="pillName">Name: </label><br />
+								<input type="text" placeholder="Red Pill" id="pillName" /></li>
+							<li><label for="quantity">Quantity: </label><br />
+								<input type="range" name="quan" min"1" max"10" id="quantity" /></li>
+							<li><label for="req">Required? </label><input type="checkbox" value="Yes" id="req" /></li>
+							<li><label for="notes">Notes: </label><br />
+							<textarea id="notes" id="notes">&nbsp;</textarea></li>
+						</ul>
+						
+					</fieldset>
+
+					<input type="button" value="Mark It!" id="submit" />
+					<input type="hidden" name="Add_a_Pill" />
+				</form>
+			
+			</section>
+			
+			<br /><br />
+			
+			<section id="links">
+				<nav>
+					<a href="#" id="clearLink">Clear Stored Data</a> | <a href="#" id="displayLink">Display Data</a>  <a href="addItem.html" id="addNew" style="display:none;">Add New Item</a>
+				</nav>
+			</section>
+			
+			<footer>
+				<p>
+					&copy; Copyright 2013 - Kyler Schroeder
+				</p>
+			</footer>
+		</div>
+		
+		<!-- JavaScript files -->
+		<script type="text/javascript" src="js/json.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+	</body>
+</html>

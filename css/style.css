@@ -1,0 +1,137 @@
+@charset "UTF-8";
+/*   CSS Document
+	 Kyler Schroeder
+	 Visual Frameworks 1304
+	 Full Sail University	*/
+	
+body {
+	line-height: 1;
+	background-color:#fff;
+	color:#000;
+	font-family: Arial, Helvetica, sans-serif;
+	margin:0px;
+	padding:0px;
+}
+
+#container {
+	width:320px;
+}
+
+header {
+	height:50px;
+	background-color:#29769c;
+}
+
+/* Index page specific */
+
+#searchBar {
+	height:35px;
+	width:310px;
+	background-color:#e6e6e6;
+	margin-bottom:5px;
+	padding-left:10px;
+}
+
+#searchBox {
+	margin-top:7px;
+}
+
+#cta {
+	position:relative;
+	height:150px;
+	width:320px;
+	background-color:#54b7e8;
+	margin-bottom:5px;
+	background-image:url('../img/cta.png');
+}
+
+#start {
+	position:absolute;
+	top:110px;
+	left:217px;
+}
+
+#buttonContainers {
+	width:320px;
+}
+
+#buttonContainers ul {
+	display:block;
+	padding:0px;
+	margin-left:10px;
+}
+
+#buttonContainers ul li {
+	padding-bottom:4px;
+}
+
+#buttonContainers ul li a {
+	width:300px;
+	display:block;
+}
+
+/* end index specifics */
+
+/* Add Item page specific */
+
+#addLink {
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+a {
+	/*text-decoration:none;*/
+	color:blue;
+}
+
+a:hover {
+	color:#BF2C53;
+}
+
+ol, ul {
+	list-style-type:none;
+}
+
+li {
+	padding-top:5px;
+}
+
+fieldset { 
+	margin-top:10px;
+	border:solid 1px #29769C;
+	/*margin:5px;*/
+}
+
+legend {
+  padding: 0.2em 0.5em;
+  border:solid 1px #29769C;
+  color:#29769C;
+  font-size:90%;
+  text-align:right;
+}
+
+#submit {
+	margin-top:15px;
+	font-size:16px;
+}
+
+#links {
+	text-align:center;
+}
+
+.activeBox {
+	border:solid 2px #BF2C53;
+}
+
+/* end Add Item specifics */
+
+footer {
+	text-align:center;
+	font-size:10px;
+	line-height:25px;
+	height:25px;
+	background-color:#29769C;
+	padding:0px;
+	margin-top:8px;
+}
