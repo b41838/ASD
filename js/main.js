@@ -50,7 +50,7 @@ $('#addItem').on('pageinit', function() {
 	var go = function go(x) {
 		var theElement = document.getElementById(x);
 		return theElement;
-	}
+	};
 
 	function toggleControls(n) {
 		switch(n) {
@@ -211,17 +211,17 @@ var storeData = function(data, key) {
 		localStorage.setItem(id, JSON.stringify(item));
 		alert("Save Successfull!");
 		window.location.reload();
-	}
+	};
 //}; 
 
 var	deleteItem = function () {
 		var ask = confirm("Are you sure you want to delete this entry?");
 		if(ask) {
 			localStorage.removeItem(this.key);
-			alert("Entry was deleted!")
+			alert("Entry was deleted!");
 			window.location.reload();
 		} else {
-			alert("Contact was not deleted.")
+			alert("Contact was not deleted.");
 		}
 };
 
