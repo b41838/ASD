@@ -1,3 +1,7 @@
+/*   Kyler Schroeder
+	 ASD 1307
+	 Full Sail University */
+
 var json = {
 	"dummyData0": {
 		"date":     ["Date:", "2013-05-01T01:00"],
