@@ -1,0 +1,63 @@
+/*   Kyler Schroeder
+	 ASD 1307
+	 Full Sail University */
+
+header {
+	background-color:#29769C;
+}
+
+#index {
+	height:200px;
+	background-image:url("../img/cta.png");
+	background-color:#29769c;
+	background-position:bottom;
+	background-repeat:no-repeat;
+}
+
+#start {
+	margin-top:110px;
+	margin-left:190px;
+	margin-right:15px;
+}
+
+h5 {
+	padding:0px;
+	margin:0px;
+}
+
+h3 {
+	padding:0px;
+}
+
+.centerIcon {
+	padding-top:25px;
+	padding-left:30px;
+}
+
+.center {
+	display:block;
+	margin-left:auto;
+	margin-right:auto; 
+}
+
+.textCenter {
+	text-align:center;
+}
+
+label.error {
+	display:block;
+	color:red;
+}
+
+#errorsLink {
+	display:none;
+}
+
+ol, ul {
+	list-style-type:none;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+li {
+	padding-top:5px;
+}
