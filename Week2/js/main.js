@@ -4,7 +4,7 @@
 
 $('#home').on('pageinit', function() {
 	//code needed for home page goes here
-});	
+});
 
 $('#addItem').on('pageinit', function() {
 
@@ -39,21 +39,11 @@ $('#addItem').on('pageinit', function() {
 	$('#displayLink').on("click", function() {
 		getData();
 	});
-	
-	$('.showLS').on("click", function() {
-		getData();
-	});
-	
-	//var displayLink = go('displayLink');
-	//displayLink.addEventListener("click", getData);
 
 	// clear stored data
 	$('#clearLink').on("click", function() {
-		clearLocal);
-	};
-	
-	//var clearLink = go('clearLink');
-	//clearLink.addEventListener("click", clearLocal);
+		clearLocal();
+	});
 
 });
 
@@ -67,17 +57,17 @@ $('#addItem').on('pageinit', function() {
 	function toggleControls(n) {
 		switch(n) {
 			case "on":
-			go('addPills').style.display = "none";
-			go('displayLink').style.display = "none";
-			go('clearLink').style.display = "inline";
-			go('addNew').style.display = "inline";
+			$('#addPills').css('display','none');
+			$('#displayLink').css('display','none');
+			$('#clearLink').css('display','inline');
+			$('#addNew').css('display','inline');
 				break;
 			case "off":
-			go('addPills').style.display = "block";
-			go('displayLink').style.display = "inline";
-			go('clearLink').style.display = "inline";
-			go('addNew').style.display = "none";
-			go('items').style.display = "none";				
+			$('#addPills').css('display','block');
+			$('#displayLink').css('display','inline');
+			$('#clearLink').css('display','inline');
+			$('#addNew').css('display','none');
+			$('#items').css('display','none');			
 				break;
 			default:
 				return false;
@@ -135,17 +125,7 @@ $('#addItem').on('pageinit', function() {
 		go('date').value = item.date[1];
 		go('sugarLevel').value = item.sugar[1];
 		go('pillName').value = item.pillName[1];
-		//go('quantity').value = item.quantity[1];
-		/*if(item.required[1] == "Yes") {
-			go('req').setAttribute("checked", "checked");
-		}*/
 		go('notes').value = item.notes[1];
-
-		// remove initial eventListener from save button
-		//saveBtn.removeEventListener("click", storeData);
-
-		// change submit button value to 'edit button'
-		//go('submit').value = "Update Record";
 		var editSubmit = go('submit');
 		editSubmit.addEventListener("click");
 		editSubmit.key = this.key;
@@ -162,23 +142,16 @@ var getData = function() {
 			enterDummyData();
 		}
 
-		// write data from localStorage to browser
-		for (var i=0, len=localStorage.length; i<len; i++) {
-			var makeLi = $('<li></li>').attr({
-						'id': 'lSData',
-						'data-role': 'listview',
-						'data-theme': 'a'}).appendTo('#viewLS'); 
-		}
-
-
 
 		// write data from localStorage to browser
 		var makeDiv = document.createElement('div');
-		makeDiv.setAttribute("id", "items");
+		makeDiv.setAttribute("id", "showLS");
+		makeDiv.setAttribute("data-role", "page");
+		makeDiv.setAttribute("data-theme", "b");
 		var makeList = document.createElement('ul');
 		makeDiv.appendChild(makeList);
 		document.body.appendChild(makeDiv);
-		go('items').style.display = "block";
+		go('showLS').style.display = "block";
 		for (var i=0, len=localStorage.length; i<len; i++) {
 			var makeLi = document.createElement('li');
 			var linksLi = document.createElement('li');
@@ -204,7 +177,6 @@ var getData = function() {
 
 var storeData = function(data, key) {
 	console.log(data);
-//	function storeData(key) {
 		// if no key, create new key
 		if(!key) {
 			// get a random number for localStorage key
@@ -214,11 +186,6 @@ var storeData = function(data, key) {
 			// if it has a key already, set it to the existing key to overwrite
 			id = key;
 		}
-
-
-
-		// run function to find if req checkbox is checked or not
-		//isRequired();
 
 		// build JSON object to store
 		var item			= {};
@@ -233,12 +200,11 @@ var storeData = function(data, key) {
 		alert("Save Successfull!");
 		window.location.reload();
 	};
-//}; 
 
 var	deleteItem = function () {
 		var ask = confirm("Are you sure you want to delete this entry?");
 		if(ask) {
-			localStorage.removeItem(this.key);
+			localStorage.removeItem($(this).attr('key'));
 			alert("Entry was deleted!");
 			window.location.reload();
 		} else {
@@ -257,6 +223,64 @@ var clearLocal = function() {
 		}
 };
 
+$('#toJSON').on("click", function() {
+
+	$.ajax({
+		url:		'xhr/entries.json',
+		type:		'GET',
+		dataType:	'json',
+		success:	function(goGetThe) {
+					for (var i in goGetThe.entry) {
+					var entry = goGetThe.entry[i];
+						$('<section data-role="content" data-theme="b">' + '<ul style="list-style-type:none;"' + 
+							'<li data-role="list-divider">' + 
+							'Date: ' + entry.date + '</li>' +
+							'<li>' + 
+							'Blood Sugar Level: ' + entry.sugar + '</li>' +
+							'<li>' + 
+							'Pill Name: ' + entry.pillName + '</li>' +  
+							'<li>' + 
+							'Quantity: ' + entry.quantity + '</li>' +
+							'<li>' + 
+							'Notes: ' + entry.notes + '</li>' + 
+							'</ul>' + '</section>').appendTo('#viewJSON');
+					};
+	}
+	});
+});
+
+$('#toXML').on('click', function() {
+
+	$.ajax( {
+		url:		'xhr/entries.xml',
+		type:		'GET',
+		dataType:	'xml',
+		success:	function(word) {
+						$(word).find("entry").each(function(){ 
+
+							var date = $(this).find('date').text(),
+								sugar = $(this).find('sugar').text(),
+								pillName = $(this).find('pillName').text(),
+								quantity = $(this).find('quantity').text(),
+								notes = $(this).find('notes').text();
+
+							$('<section data-role="content" data-theme="b">' + '<ul style="list-style-type:none;"' + 
+							'<li data-role="list-divider">' + 
+								'Date: ' + date + '</li>' +
+								'<li>' + 
+								'Blood Sugar Level: ' + sugar + '</li>' +
+								'<li>' + 
+								'Pill Name: ' + pillName + '</li>' +  
+								'<li>' + 
+								'Quantity: ' + quantity + '</li>' +
+								'<li>' + 
+								'Notes: ' + notes + '</li>' +  
+								'</ul>' + '</section>').appendTo('#viewXML');
+						});
+					}
+	});
+});
+
 $('#view').on('pageinit', function() {
 	//code needed for view page goes here
 });
@@ -264,8 +288,3 @@ $('#view').on('pageinit', function() {
 $('#about').on('pageinit', function() {
 	//code needed for about page goes here
 });
-
-/* save data
-	var saveBtn = go('submit');
-	saveBtn.addEventListener("click", storeData);
-*/

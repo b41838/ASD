@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entries>
+	<entry>
+		<date>2013-10-01T03:42</date>
+		<sugar>extremelyLow</sugar>
+		<pillName>Smack</pillName>
+		<quantity>2</quantity>
+		<notes>THEY ARE CHASING ME!!!!!!!!!</notes>
+	</entry>
+
+	<entry>
+		<date>2013-11-01T03:10</date>
+		<sugar>extremelyLow</sugar>
+		<pillName>Red Pill</pillName>
+		<quantity>1</quantity>
+		<notes>This isn't real.  This isn't real.</notes>
+	</entry>
+
+	<entry>
+		<date>2013-10-01T03:41</date>
+		<sugar>high</sugar>
+		<pillName>Pow</pillName>
+		<quantity>4</quantity>
+		<notes>Feelin good.</notes>
+	</entry>
+
+	<entry>
+		<date>2013-10-01T03:40</date>
+		<sugar>littleLow</sugar>
+		<pillName>Red Pill</pillName>
+		<quantity>1</quantity>
+		<notes>I needed this.</notes>
+	</entry>
+
+	<entry>
+		<date>2013-09-01T02:00</date>
+		<sugar>low</sugar>
+		<pillName>Smack</pillName>
+		<quantity>2</quantity>
+		<notes>I feel like I'm forgetting something.</notes>
+	</entry>
+
+	<entry>
+		<date>2013-09-01T01:59</date>
+		<sugar>extremelyHigh</sugar>
+		<pillName>Pow</pillName>
+		<quantity>4</quantity>
+		<notes>OH YEAH!</notes>
+	</entry>
+
+	<entry>
+		<date>2013-09-01T01:58</date>
+		<sugar>littleHigh</sugar>
+		<pillName>Red Pill</pillName>
+		<quantity>1</quantity>
+		<notes>Down down down, like a burning ring of fire.</notes>
+	</entry>
+
+	<entry>
+		<date>2013-08-01T04:15</date>
+		<sugar>low</sugar>
+		<pillName>Smack</pillName>
+		<quantity>2</quantity>
+		<notes>Mhmm.</notes>
+	</entry>
+	
+	<entry>
+		<date>2013-11-01T03:12</date>
+		<sugar>extremelyLow</sugar>
+		<pillName>Pow</pillName>
+		<quantity>4</quantity>
+		<notes>OH IT'S REAL!!.</notes>
+	</entry>
+	
+	<entry>
+		<date>2013-11-01T03:13</date>
+		<sugar>low</sugar>
+		<pillName>Smack</pillName>
+		<quantity>2</quantity>
+		<notes>Just need to keep breathing...</notes>
+	</entry>
+</entries>

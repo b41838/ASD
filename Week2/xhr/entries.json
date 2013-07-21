@@ -1,0 +1,90 @@
+{
+	"entry":[
+	{
+		"date":     ["2013-05-01T01:00"],
+		"sugar":    ["littleHigh"],
+		"pillName": ["Red Pill"],
+		"quantity": ["1"],
+		"notes":    ["Let's see how far the rabbit hole goes."]
+	},
+	
+	{
+		"date":     ["2013-05-01T01:01"],
+		"sugar":    ["extremelyHigh"],
+		"pillName": ["Pow"],
+		"quantity": ["4"],
+		"notes":    ["Sin."]
+	},
+
+	{
+		"date":     ["2013-05-01T01:03"],
+		"sugar":    ["low"],
+		"pillName": ["Smack"],
+		"quantity": ["2"],
+		"notes":    ["Whew."]
+	},
+
+	{
+		"date":     ["2013-06-01T03:00"],
+		"sugar":    ["high"],
+		"pillName": ["Red Pill"],
+		"quantity": ["1"],
+		"notes":    ["Let's go deeper."]
+	},
+	
+	{
+		"date":     ["2013-06-01T03:01"],
+		"sugar":    ["extremelyHigh"],
+		"pillName": ["Pow"],
+		"quantity": ["4"],
+		"notes":    ["Ohhh weeee!"]
+	},
+
+	{
+		"date":     ["2013-06-01T03:02"],
+		"sugar":    ["extremelyLow"],
+		"pillName": ["Smack"],
+		"quantity": ["2"],
+		"notes":    ["Ahhhhh."]
+	},
+
+	{
+		"date":     ["2013-07-01T02:18"],
+		"sugar":    ["littleHigh"],
+		"pillName": ["Red Pill"],
+		"quantity": ["1"],
+		"notes":    ["I don't want to go!!!!."]
+	},
+	
+	{
+		"date":     ["2013-07-01T02:19"],
+		"sugar":    ["extremelyLow"],
+		"pillName": ["Pow"],
+		"quantity": ["4"],
+		"notes":    ["MAKE IT STOP!!!"]
+	},
+
+	{
+		"date":     ["2013-07-01T02:20"],
+		"sugar":    ["extremelyLow"],
+		"pillName": ["Smack"],
+		"quantity": ["2"],
+		"notes":    ["....."]
+	},
+
+	{
+		"date":     ["2013-08-01T04:13"],
+		"sugar":    ["littleLow"],
+		"pillName": ["Red Pill"],
+		"quantity": ["1"],
+		"notes":    ["Smells like a good morning."]
+	},
+
+	{
+		"date":     ["2013-08-01T04:14"],
+		"sugar":    ["high"],
+		"pillName": ["Pow"],
+		"quantity": ["4"],
+		"notes":    ["It's going to be a great day!"]
+	}
+]}
