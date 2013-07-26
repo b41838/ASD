@@ -7,7 +7,7 @@
 		"quantity": ["1"],
 		"notes":    ["Let's see how far the rabbit hole goes."]
 	},
-	
+
 	{
 		"date":     ["2013-05-01T01:01"],
 		"sugar":    ["extremelyHigh"],
@@ -31,7 +31,7 @@
 		"quantity": ["1"],
 		"notes":    ["Let's go deeper."]
 	},
-	
+
 	{
 		"date":     ["2013-06-01T03:01"],
 		"sugar":    ["extremelyHigh"],
@@ -55,7 +55,7 @@
 		"quantity": ["1"],
 		"notes":    ["I don't want to go!!!!."]
 	},
-	
+
 	{
 		"date":     ["2013-07-01T02:19"],
 		"sugar":    ["extremelyLow"],

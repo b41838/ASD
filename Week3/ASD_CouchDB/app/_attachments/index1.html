@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<!-- Kyler Schroeder
+	 ASD 1307
+	 Full Sail University -->
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="author" content="Kyler Schroeder" />
+
+		<title>iPill Keeper</title>
+
+		<!-- Viewport options -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320" />
+
+		<!-- Smooth fonts in IE Mobile -->
+		<meta http-equiv="cleartype" content="on">
+
+		<!-- Search options -->
+		<meta name="keywords" content="Pills, Reminder, Diabetes" />
+		<meta name="description" content="A simple pill reminder application for diabetes patients." />
+		<meta name="robots" content="index" />
+
+		<!-- Stylesheets -->
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+		<link href="css/style_new.css" rel="stylesheet" type="text/css">
+
+		<!-- Modernizr -->
+		<script src="js/libs/modernizr.custom.min.js"></script>
+
+		<!-- Icons -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+	</head>
+
+	<body> <!-- Starting content section of code -->
+
+			
+		<section data-role="page" id="home">
+
+			<section data-role="header">
+				<header id="index"> <!-- App logo -->
+					<a href="index.html"><img src="img/logo.png" alt="logo"></a>
+				</header>
+			</section>
+			
+				<section data-role="content" class="ui-body">
+					<ul id="pillsList" data-role="listview">
+					</ul>
+				</section>
+	
+			<section data-role="footer" data-id="footNav">
+				<section data-role="navbar">
+					<ul data-filter="true">
+						<li><a href="#home" data-icon="home" class="ui-btn-active ui-state-persist">Home</a></li>
+					</ul>
+				</section>
+			</section>
+		</section>
+
+		<!-- JavaScript files -->
+		<script src="js/jquery-2.0.3.min.js"></script>
+		<script src="js/jquery.mobile-1.3.1.min.js"></script>
+		<script type="text/javascript" src="js/libs/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+	</body>
+</html>
