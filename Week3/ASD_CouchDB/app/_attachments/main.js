@@ -2,9 +2,72 @@
 	 ASD 1307
 	 Full Sail University */
 
-$('#home').on('pageinit', function() {
-	//code needed for home page goes here
+$(document).on('pageinit', '#home', function() {
+	$('#toPill').on("click", function() {
+		$.couch.db("asdproject").view("asd/pill", {
+			success: function(data) {
+				//console.log(data);
+				$('#pillList').empty();
+				$.each(data.rows, function(index, pill) {
+					var item = (pill.value || value.doc);
+				
+					$('#pillList').append(
+						$('<li>').append(
+							$('<a>')
+								.attr("href", "pill.html?pill=" + item._id)
+								.text(item.key)
+						)
+					);
+				});
+				$('#pillList').listview('refresh');
+			}	
+		});
+	})
 });
+
+var urlVars = function() {
+//	var urlData = $($.mobile.activePage).data("url");
+	console.log(urlData);
+	var urlParts = urlData.split('?');
+	var urlPairs = urlParts[1].split('&');
+	var urlValues = {};
+	
+	for (var pair in urlPairs) {
+		var keyValue = urlPairs[pair].split('=');
+		var key = decodeURIComponent(keyValue[0]);
+		var value = decodeURIComponent(keyValue[1]);
+		urlValues[key] = value;
+	}
+	return urlValues;
+}
+
+$(document).on('pageinit', '#pill', function() {
+	var pillInfo = urlVars()//["pill"];
+	
+//	console.log(pill);
+	var urlData = $(this).data("url");
+	console.log(urlData);
+	var urlParts = urlData.split('?');
+	var urlPairs = urlParts[1].split('&');
+	var urlValues = {};
+	
+	for (var pair in urlPairs) {
+		var keyValue = urlPairs[pair].split('=');
+		var key = decodeURIComponent(keyValue[0]);
+		var value = decodeURIComponent(keyValue[1]);
+		urlValues[key] = value;
+	}
+	console.log(urlValues);
+});
+
+// display data
+//var getData = function () {
+//	$('viewItemsList').empty();
+//	$('#toPill').on("click", function() {
+//		$.couch.db("asdproject").view("asd/pill", {
+//			success: function(data) {
+//				//console.log(data);
+//}
 
 $('#addItem').on('pageinit', function() {
 
@@ -105,31 +168,31 @@ $('#addItem').on('pageinit', function() {
 		linksLi.appendChild(deleteLink);
 	}
 
-	function enterDummyData() {
-		// store json data into localStorage
-		for(var n in json) {
-			var id = Math.floor(Math.random()*1000001);
-			localStorage.setItem(id, JSON.stringify(json[n]));
-		}
-	}
+//	function enterDummyData() {
+//		// store json data into localStorage
+//		for(var n in json) {
+//			var id = Math.floor(Math.random()*1000001);
+//			localStorage.setItem(id, JSON.stringify(json[n]));
+//		}
+//	}
 
-	function editEntry() {
-		// grab data from localStorage
-		var value = localStorage.getItem(this.key);
-		var item = JSON.parse(value);
-
-		// show form
-		toggleControls("off");
-
-		// populate form fields with current stored data
-		go('date').value = item.date[1];
-		go('sugarLevel').value = item.sugar[1];
-		go('pillName').value = item.pillName[1];
-		go('notes').value = item.notes[1];
-		var editSubmit = go('submit');
-		editSubmit.addEventListener("click");
-		editSubmit.key = this.key;
-	}
+//	function editEntry() {
+//		// grab data from localStorage
+//		var value = localStorage.getItem(this.key);
+//		var item = JSON.parse(value);
+//
+//		// show form
+//		toggleControls("off");
+//
+//		// populate form fields with current stored data
+//		go('date').value = item.date[1];
+//		go('sugarLevel').value = item.sugar[1];
+//		go('pillName').value = item.pillName[1];
+//		go('notes').value = item.notes[1];
+//		var editSubmit = go('submit');
+//		editSubmit.addEventListener("click");
+//		editSubmit.key = this.key;
+//	}
 
 var autofillData = function () {
 
@@ -200,137 +263,96 @@ var storeData = function(data, key) {
 		alert("Save Successfull!");
 		window.location.reload();
 	};
+	
+	var update = function() {
+		var doc = {
+			_id: "d12ee5ea1df6baa2b06451f44a019ab9",
+			_rev: "1-967a00dff5e02add41819138abb3284d",
+			foo: "bar"
+			};
+		
+			$.couch.db("asdproject").saveDoc(doc, {
+				success: function(data) {
+					console.log(data);
+			},
+			error: function(status) {
+				console.log(status);
+			}
+		});	
+	}
 
-var	deleteItem = function () {
-		var ask = confirm("Are you sure you want to delete this entry?");
-		if(ask) {
-			localStorage.removeItem($(this).attr('key'));
-			alert("Entry was deleted!");
-			window.location.reload();
-		} else {
-			alert("Contact was not deleted.");
-		}
-};
+	var saveNew = function() {
+		var doc = {};
+		$.couch.db("asdproject").saveDoc(doc, {
+			success: function(data) {
+				console.log(data);
+			},
+			error: function(status) {
+				console.log(status);
+			}
+		});
+	}
 
-var clearLocal = function() {
-		if(localStorage.length === 0) {
-			alert("There is no data to clear.");
-		} else {
-			localStorage.clear();
-			alert("All data has been cleared.");
-			window.location.reload();
-			return false;
-		}
-};
+	var deleteItem = function() {
+		var doc = {
+			_id: "d12ee5ea1df6baa2b06451f44a019ab9",
+			_rev: "2-13839535feb250d3d8290998b8af17c3"
+		};
+	
+		$.couch.db("asdproject").removeDoc(doc, {
+			success: function(data) {
+			console.log(data);
+			},
+		
+			error: function(status) {
+			console.log(status);
+			}
+		});	
+	}
 
-//$('#toJSON').on("click", function() {
-//
-//	$.ajax({
-//		url:		'xhr/entries.json',
-//		type:		'GET',
-//		dataType:	'json',
-//		success:	function(goGetThe) {
-//					for (var i in goGetThe.entry) {
-//					var entry = goGetThe.entry[i];
-//						$('<section data-role="content" data-theme="b">' + '<ul style="list-style-type:none;"' + 
-//							'<li data-role="list-divider">' + 
-//							'Date: ' + entry.date + '</li>' +
-//							'<li>' + 
-//							'Blood Sugar Level: ' + entry.sugar + '</li>' +
-//							'<li>' + 
-//							'Pill Name: ' + entry.pillName + '</li>' +  
-//							'<li>' + 
-//							'Quantity: ' + entry.quantity + '</li>' +
-//							'<li>' + 
-//							'Notes: ' + entry.notes + '</li>' + 
-//							'</ul>' + '</section>').appendTo('#viewJSON');
-//					};
-//	}
-//	});
-//});
+	var deleteAll = function() {
+		var docs = [
+    		{
+        		_id: "d12ee5ea1df6baa2b06451f44a01a0d8",
+        		_rev: "1-967a00dff5e02add41819138abb3284d"
+		    },
+    		{
+        		_id: "d12ee5ea1df6baa2b06451f44a01a75a",
+			    _rev: "1-967a00dff5e02add41819138abb3284d"
+    		}
+		];
+		
+		$.couch.db("asdproject").bulkRemove({"docs": docs}, {
+    		success: function(data) {
+        		console.log(data);
+    	},
+	    error: function(status) {
+		        console.log(status);
+    		}
+		});	
+	}
 
-//$('#toXML').on('click', function() {
-//
-//	$.ajax( {
-//		url:		'xhr/entries.xml',
-//		type:		'GET',
-//		dataType:	'xml',
-//		success:	function(word) {
-//						$(word).find("entry").each(function(){ 
-//
-//							var date = $(this).find('date').text(),
-//								sugar = $(this).find('sugar').text(),
-//								pillName = $(this).find('pillName').text(),
-//								quantity = $(this).find('quantity').text(),
-//								notes = $(this).find('notes').text();
-//
-//							$('<section data-role="content" data-theme="b">' + '<ul style="list-style-type:none;"' + 
-//							'<li data-role="list-divider">' + 
-//								'Date: ' + date + '</li>' +
-//								'<li>' + 
-//								'Blood Sugar Level: ' + sugar + '</li>' +
-//								'<li>' + 
-//								'Pill Name: ' + pillName + '</li>' +  
-//								'<li>' + 
-//								'Quantity: ' + quantity + '</li>' +
-//								'<li>' + 
-//								'Notes: ' + notes + '</li>' +  
-//								'</ul>' + '</section>').appendTo('#viewXML');
-//						});
-//					}
-//	});
-//});
+//var	deleteItem = function () {
+//		var ask = confirm("Are you sure you want to delete this entry?");
+//		if(ask) {
+//			localStorage.removeItem($(this).attr('key'));
+//			alert("Entry was deleted!");
+//			window.location.reload();
+//		} else {
+//			alert("Contact was not deleted.");
+//		}
+//};
 
-$('#toJSON').on("click", function() {
-
-	$.ajax({
-		"url":		"_view/entries",
-		"dataType":	'json',
-		"success":	function(data) {
-					$.each(data.rows, function(index, history) {
-						var date = history.value.date;
-						var sugar = history.value.sugar;
-						var pillName = history.value.pillName;
-						var quantity = history.value.quantity;
-						var notes = history.value.notes;
-						
-						$('#historyList').append(
-							$('<li>').append(
-								$('<a>').attr("href", "#")
-									.text(date)
-							)
-						);
-					});
-					$('#historyList').listview('refresh');
-		}
-	});
-});
-
-$('#toXML').on("click", function() {
-
-	$.ajax({
-		"url":		'/asdproject/_all_docs?include_docs=true&start_key="entries"',
-		"dataType":	'json',
-		"success":	function(data) {
-					$.each(data.rows, function(index, pills) {
-						var date = pills.doc.date;
-						var sugar = pills.doc.sugar;
-						var pillName = pills.doc.pillName;
-						var quantity = pills.doc.quantity;
-						var notes = pills.doc.notes;
-						
-						$('#pillsList').append(
-							$('<li>').append(
-								$('<a>').attr("href", "#")
-									.text(pillName)
-							)
-						);
-					});
-					$('#pillsList').listview('refresh');
-		}
-	});
-});
-
+//var clearLocal = function() {
+//		if(localStorage.length === 0) {
+//			alert("There is no data to clear.");
+//		} else {
+//			localStorage.clear();
+//			alert("All data has been cleared.");
+//			window.location.reload();
+//			return false;
+//		}
+//};
 
 $('#view').on('pageinit', function() {
 	//code needed for view page goes here
