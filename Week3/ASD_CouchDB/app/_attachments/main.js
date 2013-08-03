@@ -14,8 +14,8 @@ $(document).on('pageinit', '#home', function() {
 					$('#pillList').append(
 						$('<li>').append(
 							$('<a>')
-								.attr("href", "pill.html?pill=" + item.key)
-								.text(item.key)
+								.attr("href", "pill.html?pill=" + item._id)
+								.text(item.pillName)
 						)
 					);
 				});
@@ -25,25 +25,7 @@ $(document).on('pageinit', '#home', function() {
 	})
 });
 
-//function urlVars() {
-//	var urlData = $($.mobile.activePage).data("url");
-//	console.log(urlData);
-//	var urlParts = urlData.split('?');
-//	var urlPairs = urlParts[1].split('&');
-//	var urlValues = {};
-//	
-//	for (var pair in urlPairs) {
-//		var keyValue = urlPairs[pair].split('=');
-//		var key = decodeURIComponent(keyValue[0]);
-//		var value = decodeURIComponent(keyValue[1]);
-//		urlValues[key] = value;
-//	}
-//	return urlValues;
-//}
-
 $(document).on('pageinit', '#pill', function() {
-//	var urlData = $($.mobile.activePage).data("url");
-//	console.log(urlData);
 	var urlData = $(this).data("url");
 	console.log(urlData);
 	var urlParts = urlData.split('?');
@@ -56,20 +38,32 @@ $(document).on('pageinit', '#pill', function() {
 		var value = decodeURIComponent(keyValue[1]);
 		urlValues[key] = value;
 	}
-//	return urlValues;
-
-//	var pillInfo = urlVars();//["pill"];
 	console.log(urlValues);
 });
 
-// display data
-//var getData = function () {
-//	$('viewItemsList').empty();
-//	$('#toPill').on("click", function() {
-//		$.couch.db("asdproject").view("asd/pill", {
-//			success: function(data) {
-//				//console.log(data);
-//}
+// save data to CouchDB
+function storeData() {
+	// create an object
+	var item = {};
+		item._id            = "pill:" + Math.floor(Math.random()*100000001);
+		item.date			= $('#date').val();
+		item.sugar			= $('#sugarLevel').val();
+		item.pillName		= $('#pillName').val();
+		item.pillQuantity	= $('#pillQuantity').val();
+		item.notes			= $('#notes').val();
+	
+	// store data into CouchDB
+	$.couch.db("asdproject").saveDoc(item, {
+		success: function(item) {
+			alert("Save complete!");
+		},
+		error: function(status) {
+			alert("Save failed, please try again.");
+		}
+	});
+	window.location.reload();
+};
+
 
 $('#addItem').on('pageinit', function() {
 
@@ -195,76 +189,6 @@ $('#addItem').on('pageinit', function() {
 //		editSubmit.addEventListener("click");
 //		editSubmit.key = this.key;
 //	}
-
-var autofillData = function () {
-
-};
-
-var getData = function() {
-		toggleControls("on");
-		if(localStorage.length === 0) {
-			alert("There is no data to clear, entering dummyData.");
-			enterDummyData();
-		}
-
-
-		// write data from localStorage to browser
-		var makeDiv = document.createElement('div');
-		makeDiv.setAttribute("id", "showLS");
-		makeDiv.setAttribute("data-role", "page");
-		makeDiv.setAttribute("data-theme", "b");
-		var makeList = document.createElement('ul');
-		makeDiv.appendChild(makeList);
-		document.body.appendChild(makeDiv);
-		go('showLS').style.display = "block";
-		for (var i=0, len=localStorage.length; i<len; i++) {
-			var makeLi = document.createElement('li');
-			var linksLi = document.createElement('li');
-			makeList.appendChild(makeLi);
-			var key = localStorage.key(i);
-			var value = localStorage.getItem(key);
-			// convert string from localStorage value to object using JSON.parse
-			var obj = JSON.parse(value);
-			var makeSubList = document.createElement('ul');
-			makeLi.appendChild(makeSubList);
-			grabImage(obj.sugar[1], makeSubList);
-			//grabImage(makeSubList);
-			for (var n in obj) {
-				var makeSubLi = document.createElement('li');
-				makeSubList.appendChild(makeSubLi);
-				var optSubText = obj[n][0]+" "+obj[n][1];
-				makeSubLi.innerHTML = optSubText;
-				makeSubList.appendChild(linksLi);
-			}
-			createItemLinks(localStorage.key(i), linksLi); // create our edit and delete buttons or links for each item in localstorage
-		}
-};
-
-var storeData = function(data, key) {
-	console.log(data);
-		// if no key, create new key
-		if(!key) {
-			// get a random number for localStorage key
-			var id			= Math.floor(Math.random()*1000001);
-
-		} else {
-			// if it has a key already, set it to the existing key to overwrite
-			id = key;
-		}
-
-		// build JSON object to store
-		var item			= {};
-		item.date			= ["Date:", $('#date').val];
-		item.sugar			= ["Sugar Level:", $('#sugarLevel').value];
-		item.pillName		= ["Pill Name:", $('#pillName').value];
-		item.pillQuantity	= ["Pill Quantity:", $('#pillQuantity').value];
-		item.notes			= ["Notes:", $('#notes').value];
-
-		// save into LocalStorage with stringify
-		localStorage.setItem(id, JSON.stringify(item));
-		alert("Save Successfull!");
-		window.location.reload();
-	};
 	
 	var update = function() {
 		var doc = {
