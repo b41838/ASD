@@ -44,6 +44,8 @@ $(document).on('pageinit', '#home', function() {
 $(document).on('pageinit', '#pill', function() {
 //	var urlData = $($.mobile.activePage).data("url");
 //	console.log(urlData);
+	var urlData = $(this).data("url");
+	console.log(urlData);
 	var urlParts = urlData.split('?');
 	var urlPairs = urlParts[1].split('&');
 	var urlValues = {};
@@ -57,9 +59,7 @@ $(document).on('pageinit', '#pill', function() {
 //	return urlValues;
 
 //	var pillInfo = urlVars();//["pill"];
-//	console.log(pill);
-	var urlData = $(this).data("url");
-	console.log(urlData);
+	console.log(urlValues);
 });
 
 // display data
