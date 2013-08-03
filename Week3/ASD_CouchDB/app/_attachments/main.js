@@ -25,7 +25,23 @@ $(document).on('pageinit', '#home', function() {
 	})
 });
 
-function urlVars() {
+//function urlVars() {
+//	var urlData = $($.mobile.activePage).data("url");
+//	console.log(urlData);
+//	var urlParts = urlData.split('?');
+//	var urlPairs = urlParts[1].split('&');
+//	var urlValues = {};
+//	
+//	for (var pair in urlPairs) {
+//		var keyValue = urlPairs[pair].split('=');
+//		var key = decodeURIComponent(keyValue[0]);
+//		var value = decodeURIComponent(keyValue[1]);
+//		urlValues[key] = value;
+//	}
+//	return urlValues;
+//}
+
+$(document).on('pageinit', '#pill', function() {
 	var urlData = $($.mobile.activePage).data("url");
 	console.log(urlData);
 //	var urlParts = urlData.split('?');
@@ -39,10 +55,8 @@ function urlVars() {
 //		urlValues[key] = value;
 //	}
 //	return urlValues;
-}
 
-$(document).on('pageinit', '#pill', function() {
-	var pillInfo = urlVars();//["pill"];
+//	var pillInfo = urlVars();//["pill"];
 //	console.log(pill);
 	var urlData = $(this).data("url");
 	console.log(urlData);
