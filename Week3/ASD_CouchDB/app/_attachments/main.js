@@ -14,7 +14,7 @@ $(document).on('pageinit', '#home', function() {
 					$('#pillList').append(
 						$('<li>').append(
 							$('<a>')
-								.attr("href", "pill.html?pill=" + item._id)
+								.attr("href", "pill.html?pill=" + item.key)
 								.text(item.key)
 						)
 					);
@@ -25,39 +25,27 @@ $(document).on('pageinit', '#home', function() {
 	})
 });
 
-var urlVars = function() {
-//	var urlData = $($.mobile.activePage).data("url");
+function urlVars() {
+	var urlData = $($.mobile.activePage).data("url");
 	console.log(urlData);
-	var urlParts = urlData.split('?');
-	var urlPairs = urlParts[1].split('&');
-	var urlValues = {};
-	
-	for (var pair in urlPairs) {
-		var keyValue = urlPairs[pair].split('=');
-		var key = decodeURIComponent(keyValue[0]);
-		var value = decodeURIComponent(keyValue[1]);
-		urlValues[key] = value;
-	}
-	return urlValues;
+//	var urlParts = urlData.split('?');
+//	var urlPairs = urlParts[1].split('&');
+//	var urlValues = {};
+//	
+//	for (var pair in urlPairs) {
+//		var keyValue = urlPairs[pair].split('=');
+//		var key = decodeURIComponent(keyValue[0]);
+//		var value = decodeURIComponent(keyValue[1]);
+//		urlValues[key] = value;
+//	}
+//	return urlValues;
 }
 
 $(document).on('pageinit', '#pill', function() {
-	var pillInfo = urlVars()//["pill"];
-	
+	var pillInfo = urlVars();//["pill"];
 //	console.log(pill);
 	var urlData = $(this).data("url");
 	console.log(urlData);
-	var urlParts = urlData.split('?');
-	var urlPairs = urlParts[1].split('&');
-	var urlValues = {};
-	
-	for (var pair in urlPairs) {
-		var keyValue = urlPairs[pair].split('=');
-		var key = decodeURIComponent(keyValue[0]);
-		var value = decodeURIComponent(keyValue[1]);
-		urlValues[key] = value;
-	}
-	console.log(urlValues);
 });
 
 // display data
