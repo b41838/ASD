@@ -42,18 +42,18 @@ $(document).on('pageinit', '#home', function() {
 //}
 
 $(document).on('pageinit', '#pill', function() {
-	var urlData = $($.mobile.activePage).data("url");
-	console.log(urlData);
-//	var urlParts = urlData.split('?');
-//	var urlPairs = urlParts[1].split('&');
-//	var urlValues = {};
-//	
-//	for (var pair in urlPairs) {
-//		var keyValue = urlPairs[pair].split('=');
-//		var key = decodeURIComponent(keyValue[0]);
-//		var value = decodeURIComponent(keyValue[1]);
-//		urlValues[key] = value;
-//	}
+//	var urlData = $($.mobile.activePage).data("url");
+//	console.log(urlData);
+	var urlParts = urlData.split('?');
+	var urlPairs = urlParts[1].split('&');
+	var urlValues = {};
+	
+	for (var pair in urlPairs) {
+		var keyValue = urlPairs[pair].split('=');
+		var key = decodeURIComponent(keyValue[0]);
+		var value = decodeURIComponent(keyValue[1]);
+		urlValues[key] = value;
+	}
 //	return urlValues;
 
 //	var pillInfo = urlVars();//["pill"];
