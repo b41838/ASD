@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<!-- Kyler Schroeder
+	 ASD 1307
+	 Full Sail University -->
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="author" content="Kyler Schroeder" />
+
+		<title>View Pills</title>
+
+		<!-- Viewport options -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320" />
+
+		<!-- Smooth fonts in IE Mobile -->
+		<meta http-equiv="cleartype" content="on">
+
+		<!-- Search options -->
+		<meta name="keywords" content="Pills, Reminder, Diabetes" />
+		<meta name="description" content="A simple pill reminder application for diabetes patients." />
+		<meta name="robots" content="index" />
+
+		<!-- Stylesheets -->
+
+		<!-- Modernizr -->
+
+		<!-- Icons -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+	</head>
+
+	<body> <!-- Starting content section of code -->
+		<section data-role="page" id="destroy">
+
+			<section data-role="header" data-position="fixed">
+				<header> <!-- App logo -->
+					<a href="index.html"><img src="logo.png" alt="logo"></a>
+				</header>
+			</section>
+
+			<section data-role="content" class="ui-body">
+				<h2>Delete Items</h2>
+				
+                <ul id="pillsToDestroy" data-role="listview">
+                </ul>
+                
+			</section>
+
+			<section data-role="footer" data-position="fixed" data-id="footNav">
+				<section data-role="navbar">
+					<ul>
+						<li><a href="#home" data-icon="home">Home</a></li>
+						<li><a href="#addItem" data-icon="ui-icon-circle-plus">Add Item</a></li>
+						<li><a href="#view" data-icon="info" class="ui-btn-active ui-state-persist">View Items</a></li>
+					</ul>
+				</section>
+			</section>
+        </section>

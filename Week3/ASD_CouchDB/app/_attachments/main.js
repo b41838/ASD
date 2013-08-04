@@ -2,28 +2,135 @@
 	 ASD 1307
 	 Full Sail University */
 
-$(document).on('pageinit', '#home', function() {
-	$('#toPill').on("click", function() {
+$(document).on('pageinit', '#viewPill', function() {
+
+});
+//$(document).on('pageinit', '#home', function() {
+//	$('#toPill').on("click", function() {
+//		$.couch.db("asdproject").view("asd/pill", {
+//			success: function(data) {
+//				console.log(data);
+//				$('#pillList').empty();
+//				$.each(data.rows, function(index, pill) {
+//					var item = (pill.value || value.doc);
+//				
+//					$('#pillList').append(
+//						$('<li>').append(
+//							$('<a>')
+//								.attr("href", "pill.html?pill=" + item.pillName)
+//								.text(item.pillName)
+//						)
+//					);
+//				});
+//				$('#pillList').listview('refresh');
+//			}	
+//		});
+//	})
+
+$(document).on('pageinit', '#viewPill', function() {
+	$('#pillsToDestroy').empty();
+		
+	var pillDocs = [];
+	
+	$.couch.db("asdproject").view("asd/pill", {
+		success: function(data) {
+			
+			$.each(data.rows, function(index, pill) {
+				var pill = (pill.value || pill.doc);
+					
+				var pillDoc = {
+					_id: pill.id,
+					_rev: pill.rev
+				}
+				
+				pillDocs.push(pillDoc);
+				
+				$('#pillList').append(
+					$('<li>').append(
+						$('<a>')
+							.attr("href", "pill.html?pill=" + pill.key)
+							.text(pill.pillName)
+					)
+				);
+			});
+			$('#pillList').listview('refresh');
+		}		
+	});
+	
+	$("#deleteAll").on("click", function() {
+		if(pillDocs.length === 0)	{
+			alert("There is no data to delete!.");
+		} else {
+			var deleteAlert = confirm("This will delete the entire contents of the database, are you sure?");
+			if(deleteAlert) {
+
+				$.couch.db("asdproject").bulkRemove({docs: pillDocs}, {
+					success: function(data) {
+						alert("Everything has been deleted.");
+						window.location.href = "index.html";
+					}
+					
+				});
+			} else {
+				alert("Nothing has been changed.");
+				window.location.reload();
+			}
+		}
+	});
+	
+});
+	
+	$('#toEdit').on("click", function() {
 		$.couch.db("asdproject").view("asd/pill", {
 			success: function(data) {
 				//console.log(data);
-				$('#pillList').empty();
+				$('#pillsToEdit').empty();
 				$.each(data.rows, function(index, pill) {
 					var item = (pill.value || value.doc);
 				
-					$('#pillList').append(
+					$('#pillsToEdit').append(
 						$('<li>').append(
 							$('<a>')
-								.attr("href", "pill.html?pill=" + item._id)
+								.attr("href", "edit.html?edit=" + item.pillName)
 								.text(item.pillName)
 						)
 					);
 				});
-				$('#pillList').listview('refresh');
+				$('#pillsToEdit').listview('refresh');
 			}	
 		});
 	})
-});
+	
+	$('#toDestroy').on("click", function() {
+		$('#pillsToDestroy').empty();
+		
+		var pillDocs = [];
+	
+		$.couch.db("asdproject").view("asd/pill", {
+			success: function(data) {
+				//console.log(data);
+				$.each(data.rows, function(index, pill) {
+					var item = (pill.value || value.doc);
+					
+					var pillDoc = {
+						_id: pill.id,
+						_rev: pill.rev
+					}
+					
+					pillDocs.push(pillDoc);
+				
+					$('#pillsToDestroy').append(
+						$('<li>').append(
+							$('<a>')
+								.attr("href", "destroy.html?destroy=" + item.key)
+								.text(item.pillName)
+						)
+					);
+				});
+				$('#pillsToDestroy').listview('refresh');
+			}	
+		});
+	});
 
 $(document).on('pageinit', '#pill', function() {
 	var urlData = $(this).data("url");
@@ -41,15 +148,64 @@ $(document).on('pageinit', '#pill', function() {
 	console.log(urlValues);
 });
 
+$(document).on('pageinit', '#edit', function() {
+	var urlData = $(this).data("url");
+	console.log(urlData);
+	var urlParts = urlData.split('?');
+	var urlPairs = urlParts[1].split('&');
+	var urlValues = {};
+	
+	for (var pair in urlPairs) {
+		var keyValue = urlPairs[pair].split('=');
+		var key = decodeURIComponent(keyValue[0]);
+		var value = decodeURIComponent(keyValue[1]);
+		urlValues[key] = value;
+	}
+	console.log(urlValues);
+});
+
+$(document).on('pageinit', '#destroy', function() {
+	var urlData = $(this).data("url");
+	console.log(urlData);
+	var urlParts = urlData.split('?');
+	var urlPairs = urlParts[1].split('&');
+	var urlValues = {};
+	
+	for (var pair in urlPairs) {
+		var keyValue = urlPairs[pair].split('=');
+		var key = decodeURIComponent(keyValue[0]);
+		var value = decodeURIComponent(keyValue[1]);
+		urlValues[key] = value;
+	}
+	console.log(urlValues);
+});
+
+// delete single item from CouchDB
+$('.delete').on('click', function() {
+	var doc = {};
+	doc._id = $(this).data('id');
+	doc._rev = $(this).data('rev');
+	
+	$.couch.db("asdproject").removeDoc(doc, {
+		success: function(data) {
+			console.log('Item deleted successfully: ' + data);
+		},
+		error: function(status) {
+			console.log('Item was not deleted, please try again. ' + status);
+		}
+	});
+});
+
+
 // save data to CouchDB
 function storeData() {
 	// create an object
 	var item = {};
-		item._id            = "pill:" + Math.floor(Math.random()*100000001);
-		item.date			= $('#date').val();
+		item._id            = "pill:" + $('#pillName').val(); //Math.floor(Math.random()*100000001);
+		item.date			= $('#pillDate').val();
 		item.sugar			= $('#sugarLevel').val();
 		item.pillName		= $('#pillName').val();
-		item.pillQuantity	= $('#pillQuantity').val();
+		item.quantity		= $('#pillQuantity').val();
 		item.notes			= $('#notes').val();
 	
 	// store data into CouchDB
@@ -190,73 +346,7 @@ $('#addItem').on('pageinit', function() {
 //		editSubmit.key = this.key;
 //	}
 	
-	var update = function() {
-		var doc = {
-			_id: "d12ee5ea1df6baa2b06451f44a019ab9",
-			_rev: "1-967a00dff5e02add41819138abb3284d",
-			foo: "bar"
-			};
-		
-			$.couch.db("asdproject").saveDoc(doc, {
-				success: function(data) {
-					console.log(data);
-			},
-			error: function(status) {
-				console.log(status);
-			}
-		});	
-	}
 
-	var saveNew = function() {
-		var doc = {};
-		$.couch.db("asdproject").saveDoc(doc, {
-			success: function(data) {
-				console.log(data);
-			},
-			error: function(status) {
-				console.log(status);
-			}
-		});
-	}
-
-	var deleteItem = function() {
-		var doc = {
-			_id: "d12ee5ea1df6baa2b06451f44a019ab9",
-			_rev: "2-13839535feb250d3d8290998b8af17c3"
-		};
-	
-		$.couch.db("asdproject").removeDoc(doc, {
-			success: function(data) {
-			console.log(data);
-			},
-		
-			error: function(status) {
-			console.log(status);
-			}
-		});	
-	}
-
-	var deleteAll = function() {
-		var docs = [
-    		{
-        		_id: "d12ee5ea1df6baa2b06451f44a01a0d8",
-        		_rev: "1-967a00dff5e02add41819138abb3284d"
-		    },
-    		{
-        		_id: "d12ee5ea1df6baa2b06451f44a01a75a",
-			    _rev: "1-967a00dff5e02add41819138abb3284d"
-    		}
-		];
-		
-		$.couch.db("asdproject").bulkRemove({"docs": docs}, {
-    		success: function(data) {
-        		console.log(data);
-    	},
-	    error: function(status) {
-		        console.log(status);
-    		}
-		});	
-	}
 
 //var	deleteItem = function () {
 //		var ask = confirm("Are you sure you want to delete this entry?");

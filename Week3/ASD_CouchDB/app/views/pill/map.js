@@ -7,6 +7,7 @@ function (doc) {
 			"sugar": doc.sugar,
 			"pillName": doc.pillName,
 			"quantity": doc.quantity,
+			"notes": doc.notes
 		});
 	} 
 };

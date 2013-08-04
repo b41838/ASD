@@ -53,35 +53,21 @@
 							<a href="#viewPill" id="toPill" data-ajax="false">
 								<img src="pillIcon.png" alt="pill icon" class="centerIcon">
 								<h3>My Pills</h3>
-								<p>A quick list of your pills imported from a view.</p>
+								<p>View a list of your pills.</p>
 							</a>
 						</li>
 						<li>
-							<a href="#viewXML" id="toXML" data-ajax="false">
+							<a href="#editPill" id="toEdit" data-ajax="false">
 								<img src="entriesIcon.png" alt="list icon" class="centerIcon">
-								<h3>My Entries</h3>
-								<p>View your tracked pill regiments imported from a URL.</p>
+								<h3>Edit Pills</h3>
+								<p>Edit the pills you have saved.</p>
 							</a>
 						</li>
 						<li>
-							<a href="#error">
+							<a href="#destroyPill" id="toDestroy" data-ajax="false">
 								<img src="notesIcon.png" alt="notebook icon" class="centerIcon">
-								<h3>My Notes</h3>
-								<p>Notes for your pleasure.</p>
-							</a>
-						</li>
-						<li>
-							<a href="#error">
-								<img src="docInfoIcon.png" alt="contact card icon" class="centerIcon">
-								<h3>Doctors Information</h3>
-								<p>Quickly enter and view your doctors information.</p>
-							</a>
-						</li>
-						<li>
-							<a href="#error">
-								<img src="historyIcon.png" alt="calendar icon" class="centerIcon">
-								<h3>Medical History</h3>
-								<p>Enter your medical history for quick access.</p>
+								<h3>Delete Pills</h3>
+								<p>Delete pills from your regiment.</p>
 							</a>
 						</li>
 					</ul>
@@ -92,7 +78,7 @@
 					<ul data-filter="true">
 						<li><a href="#home" data-icon="home" class="ui-btn-active ui-state-persist">Home</a></li>
 						<li><a href="#addItem" data-icon="ui-icon-circle-plus">Add Item</a></li>
-						<li><a href="#view" data-icon="info">View Items</a></li>
+						<li><a href="#viewPill" data-icon="info">View Items</a></li>
 					</ul>
 				</section>
 			</section>
@@ -170,12 +156,11 @@
 					<ul>
 						<li><a href="#home" data-icon="home">Home</a></li>
 						<li><a href="#addItem" data-icon="ui-icon-circle-plus" class="ui-btn-active ui-state-persist">Add Item</a></li>
-						
-						<li><a href="#view" data-icon="info">View Items</a></li>
+						<li><a href="#viewPill" data-icon="info">View Items</a></li>
 					</ul>
 				</section>
 			</section>
-		</section>
+            </section>
 		</section>
 
 		<section data-role="page" id="viewPill">
@@ -191,18 +176,23 @@
 					</ul>
 				</section>
                 
+                <section>
+                 <input type="button" value="Delete All" id="deleteAll" data-theme="a" />
+                </section>
+                
 			<section data-role="footer" data-position="fixed" data-id="footNav">
 				<section data-role="navbar">
 					<ul>
 						<li><a href="#home" data-icon="home">Home</a></li>
 						<li><a href="#addItem" data-icon="ui-icon-circle-plus">Add Item</a></li>
-						<li><a href="#view" data-icon="info">View Items</a></li>
+						<li><a href="#viewPill" data-icon="info">View Items</a></li>
 					</ul>
 				</section>
 			</section>
 		</section>
-		
-		<section data-role="page" id="viewXML">
+        
+        
+        <section data-role="page" id="editPill">
 
 			<section data-role="header" data-position="fixed">
 				<header> <!-- App logo -->
@@ -211,7 +201,7 @@
 			</section>
 
 				<section data-role="content" class="ui-body">
-					<ul id="pillsList" data-role="listview">
+					<ul id="pillsToEdit" data-role="listview">
 					</ul>
 				</section>
 
@@ -220,13 +210,14 @@
 					<ul>
 						<li><a href="#home" data-icon="home">Home</a></li>
 						<li><a href="#addItem" data-icon="ui-icon-circle-plus">Add Item</a></li>
-						<li><a href="#view" data-icon="info">View Items</a></li>
+						<li><a href="#viewPill" data-icon="info">View Items</a></li>
 					</ul>
 				</section>
 			</section>
 		</section>
-
-		<section data-role="page" id="view">
+        
+        
+        <section data-role="page" id="destroyPill">
 
 			<section data-role="header" data-position="fixed">
 				<header> <!-- App logo -->
@@ -237,7 +228,7 @@
 			<section data-role="content" class="ui-body">
 				<h2>View Items</h2>
 				
-                <ul id="viewItemsList" data-role="listview">
+                <ul id="pillsToDestroy" data-role="listview">
                 </ul>
                 
 			</section>
@@ -247,11 +238,12 @@
 					<ul>
 						<li><a href="#home" data-icon="home">Home</a></li>
 						<li><a href="#addItem" data-icon="ui-icon-circle-plus">Add Item</a></li>
-						<li><a href="#view" data-icon="info" class="ui-btn-active ui-state-persist">View Items</a></li>
+						<li><a href="#viewPill" data-icon="info">View Items</a></li>
 					</ul>
 				</section>
 			</section>
-		</section>
+        </section>
+        
 				
 		<section data-role="page" id="error">
 			<section data-role="content">
